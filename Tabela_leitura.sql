@@ -1,1 +1,0 @@
-SELECT * FROM dashboard_monitoramento;
