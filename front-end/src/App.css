@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #081a44;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.sair {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.form-card {
+  background: #1b2a4a;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+}
+
+.form-card input,
+.form-card select {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+}
+
+.form-card button {
+  width: 100%;
+  padding: 14px;
+  background: #39aef0;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.lab-card {
+  background: #1b2a4a;
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #39507e;
+}
+
+.lab-card h3 {
+  margin-bottom: 15px;
+  color: #4dc4ff;
+}
+
+.lab-card p {
+  margin-bottom: 10px;
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container form {
+  width: 400px;
+  background: #1b2a4a;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.login-container h1 {
+  margin-bottom: 30px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 14px;
+  background: #39aef0;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.erro {
+  color: #ff6b6b;
+  margin-top: 15px;
+  display: block;
+}
