@@ -1,145 +1,215 @@
-
-
 # Plataforma de Monitoramento IoT para Laboratórios
 
-Projeto desenvolvido para a disciplina de Banco de Dados utilizando arquitetura CQRS (Command Query Responsibility Segregation).
+## Descrição do Projeto
 
-## 📌 Objetivo
+Este projeto foi desenvolvido na disciplina de Laboratório de Banco de Dados com o objetivo de criar uma plataforma de monitoramento IoT para laboratórios acadêmicos.
 
-O sistema foi desenvolvido para monitorar laboratórios da faculdade utilizando sensores IoT responsáveis por coletar:
+O sistema permite monitorar em tempo real informações de temperatura, umidade e presença através de sensores distribuídos em diferentes laboratórios.
 
-- Temperatura
-- Umidade
-- Presença
-
-A aplicação separa as operações de escrita e leitura em bancos diferentes para melhorar desempenho, organização e escalabilidade.
+A solução foi construída utilizando a arquitetura CQRS (Command Query Responsibility Segregation), separando as operações de escrita e leitura em bancos de dados distintos para melhorar desempenho e escalabilidade.
 
 ---
 
-# 🚀 Tecnologias Utilizadas
+## Objetivos
 
-- Node.js
-- Express
-- PostgreSQL
-- Thunder Client
-- Visual Studio Code
+* Monitorar temperatura dos laboratórios
+* Monitorar umidade dos ambientes
+* Detectar presença de pessoas
+* Disponibilizar dashboard para visualização dos dados
+* Implementar autenticação segura de usuários
+* Aplicar arquitetura CQRS
 
 ---
 
-# 🏗️ Arquitetura CQRS
+## Tecnologias Utilizadas
 
-O projeto utiliza separação entre:
+### Front-End
 
-## Banco 2 — Escrita (`iot_ecrita`)
+* React
+* Axios
+* CSS
+
+### Back-End
+
+* Node.js
+* Express.js
+
+### Banco de Dados
+
+* PostgreSQL (Banco de Escrita)
+* MySQL (Banco de Leitura)
+
+### Autenticação
+
+* Firebase Authentication
+
+---
+
+## Arquitetura do Sistema
+
+O sistema utiliza CQRS para separar responsabilidades:
+
+### Banco de Escrita (PostgreSQL)
+
 Responsável por:
-- INSERT
-- UPDATE
-- DELETE
-- Recebimento dos dados dos sensores
 
-Tabelas:
-- laboratorios
-- sensores
-- leituras_sensor
-- alertas
+* Cadastro de sensores
+* Armazenamento das leituras IoT
+* Registro de alertas
+* Recebimento de dados enviados pelos sensores
 
----
+### Banco de Leitura (MySQL)
 
-## Banco 3 — Leitura (`iot_leitura`)
 Responsável por:
-- SELECT
-- Dashboard
-- Relatórios
-- Consultas rápidas
 
-Tabela:
-- dashboard_monitoramento
+* Dashboard de monitoramento
+* Consultas rápidas
+* Dados consolidados
+* Exibição para usuários finais
 
 ---
 
-# 🔄 Fluxo do Sistema
+## Estrutura do Projeto
 
-Sensores IoT → API Node.js → Banco Escrita → Banco Leitura → Dashboard
+```text
+Monitoramento-IoT
+│
+├── Front-End
+│   ├── React
+│   ├── Firebase
+│   └── Dashboard
+│
+├── Server-Escrita
+│   ├── Node.js
+│   ├── PostgreSQL
+│   └── API REST
+│
+├── Server-Leitura
+│   ├── Node.js
+│   ├── MySQL
+│   └── Dashboard API
+│
+└── Documentação
+```
 
 ---
 
-# 📡 Rotas da API
+## Modelagem de Dados
 
-## GET /
+### Banco de Escrita
 
-Verifica se a API está funcionando.
+#### Laboratórios
+
+* id_laboratorio
+* nome
+* bloco
+* capacidade
+
+#### Sensores
+
+* id_sensor
+* tipo_sensor
+* localizacao
+* status_sensor
+* id_laboratorio
+
+#### Leituras
+
+* id_leitura
+* temperatura
+* umidade
+* presenca
+* data_hora
+* id_sensor
+
+#### Alertas
+
+* id_alerta
+* tipo_alerta
+* descricao
+* nivel
+* data_alerta
+* id_sensor
 
 ---
 
-## GET /dashboard
+### Banco de Leitura
 
-Retorna os dados do dashboard do banco de leitura.
+#### Dashboard Monitoramento
+
+* id_dashboard
+* laboratorio
+* media_temperatura
+* media_umidade
+* total_presencas
+* total_leituras
+* atualizado_em
 
 ---
 
-## POST /leituras
+## Funcionalidades
 
-Insere leituras dos sensores no banco de escrita.
+### Login
 
-### Exemplo JSON:
+* Autenticação Firebase
+* Controle de acesso
+* Validação de usuários
 
-```json
-{
-  "temperatura": 25,
-  "umidade": 60,
-  "presenca": true,
-  "id_sensor": 1
-}
+### Dashboard
 
-# Sprint 1 — Plataforma de Monitoramento IoT para Laboratórios
+* Visualização dos laboratórios
+* Temperatura média
+* Umidade média
+* Total de presenças
+* Total de leituras
 
-## Objetivo
+### Sensores
 
-O Sprint 1 teve como objetivo definir a arquitetura inicial do sistema, criar os bancos de dados e preparar a autenticação com Firebase.
+* Cadastro de sensores
+* Recebimento de leituras
+* Sincronização entre bancos
 
-## Tema
+---
 
-O projeto consiste em uma plataforma IoT para monitoramento de laboratórios da faculdade, coletando dados de temperatura, umidade e presença.
+## Fluxo de Funcionamento
 
-## Arquitetura
+1. O sensor envia dados para a API de Escrita.
+2. A API grava os dados no PostgreSQL.
+3. O serviço de sincronização envia os dados para o MySQL.
+4. O Dashboard consulta o banco de leitura.
+5. O usuário visualiza as informações em tempo real.
 
-Foi utilizada a arquitetura CQRS, separando escrita e leitura em bancos diferentes.
+---
 
-## Banco de Escrita
+## Integrantes
 
-Banco: iot_ecrita
+* Integrante 1
+* Integrante 2
+* Integrante 3
+* Integrante 4
 
-Responsável por armazenar os dados brutos dos sensores.
+---
 
-Tabelas:
-- laboratorios
-- sensores
-- leituras_sensor
-- alertas
+## Disciplina
 
-## Banco de Leitura
+Laboratório de Banco de Dados
 
-Banco: iot_leitura
+---
 
-Responsável por armazenar dados consolidados para dashboard.
+## Arquitetura Utilizada
 
-Tabela:
-- dashboard_monitoramento
+CQRS (Command Query Responsibility Segregation)
 
-## Firebase
+---
 
-O Firebase Authentication será utilizado para autenticação dos usuários do sistema, como técnicos, professores e administradores.
+## Status do Projeto
 
-## Tecnologias
+Projeto acadêmico concluído e funcional.
 
-- Node.js
-- Express
-- PostgreSQL
-- Firebase Authentication
-- Visual Studio Code
-- Thunder Client
-
-## Conclusão
-
-O Sprint 1 estruturou a base do projeto, com a modelagem dos bancos, arquitetura CQRS e preparação da autenticação.
-
+* Front-End React
+* Firebase Authentication
+* API REST Node.js
+* PostgreSQL
+* MySQL
+* Dashboard Web
+* CQRS Implementado
